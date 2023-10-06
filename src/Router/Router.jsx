@@ -3,6 +3,8 @@ import Layout from "../layout/Layout";
 import HomePage from "../Pages/HomePage";
 
 import DestinationDetails from "../Pages/DestinationDetails";
+import LogIn from "../Authentication/LogIn";
+import Registration from "../Authentication/Registration";
 
 const Router = createBrowserRouter ([
     {
@@ -17,6 +19,14 @@ const Router = createBrowserRouter ([
                 path: "/destination/:id",
                 element:<DestinationDetails></DestinationDetails>,
                 loader: ()=> fetch("/data.json")
+            },
+            {
+                path: "/login",
+                element: <LogIn></LogIn>
+            },
+            {
+                path: "/registration",
+                element: <Registration></Registration>
             }
         ]
     }
