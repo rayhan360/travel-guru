@@ -12,7 +12,7 @@ const DestinationDetails = () => {
     const tours = destination.find(tour => tour.id === idInt)
     // console.log(tours);
     const { name, description, image } = tours;
-    console.log(name, description, image);
+    // console.log(name, description, image);
 
 
 

@@ -1,9 +1,33 @@
 import { Link } from "react-router-dom";
 import Navbar from "../header/Navbar";
 import SocialAuthentication from "./SocialAuthentication";
-
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProviders";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LogIn = () => {
+
+    const { logInUser } = useContext(AuthContext)
+
+    const handleLogIn = (e) => {
+        e.preventDefault()
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        // console.log(email, password);
+
+        logInUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                toast.success("login successful")
+
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(error.message)
+            })
+    }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -15,7 +39,7 @@ const LogIn = () => {
                     <p className="mt-1 block font-sans text-base font-normal leading-relaxed text-gray-700 antialiased">
                         Enter your details to Login.
                     </p>
-                    <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                    <form onSubmit={handleLogIn} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                         <div className="mb-4 flex flex-col gap-6">
                             <div className="relative h-11 w-full min-w-[200px]">
                                 <input
@@ -79,6 +103,7 @@ const LogIn = () => {
 
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 };
