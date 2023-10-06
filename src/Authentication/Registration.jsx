@@ -5,6 +5,8 @@ import SocialAuthentication from './SocialAuthentication';
 import { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProviders';
 import 'react-toastify/dist/ReactToastify.css';
+import { updateProfile } from 'firebase/auth';
+
 
 const Registration = () => {
 
@@ -32,16 +34,28 @@ const Registration = () => {
             toast.error("please accept our terms and condition")
         }
 
-        
+
 
         createUser(email, password)
-        .then(result => {
-            console.log(result.user);
-            e.target.reset();
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result.user);
+                e.target.reset();
+
+
+
+                // update profile
+                updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                    .then(() => console.log("profile updated"))
+                    .catch()
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
 
 
     }

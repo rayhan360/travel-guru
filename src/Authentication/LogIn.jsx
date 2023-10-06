@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../header/Navbar";
 import SocialAuthentication from "./SocialAuthentication";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {  sendPasswordResetEmail } from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
 const LogIn = () => {
 
     const { logInUser } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const emailRef = useRef(null)
 
     const handleLogIn = (e) => {
         e.preventDefault()
@@ -20,12 +24,24 @@ const LogIn = () => {
             .then(result => {
                 console.log(result.user);
                 toast.success("login successful")
+                e.target.reset()
+                navigate('/')
 
             })
             .catch(error => {
                 console.log(error);
                 toast.error(error.message)
             })
+    }
+
+    const handleForgetPassword = () => {
+        const email = emailRef.current.value;
+
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                toast("please check your email")
+            })
+            .catch(error => console.log(error))
     }
 
     return (
@@ -43,6 +59,7 @@ const LogIn = () => {
                         <div className="mb-4 flex flex-col gap-6">
                             <div className="relative h-11 w-full min-w-[200px]">
                                 <input
+                                    ref={emailRef}
                                     type="email"
                                     name="email"
                                     className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-[#F9A51A] focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -70,7 +87,7 @@ const LogIn = () => {
                             <div className="form-control flex">
                                 <div>
                                     <label className="label">
-                                        <a href="#" className="label-text-alt link link-hover text-[#F9A51A]">Forgot password?</a>
+                                        <a onClick={handleForgetPassword} href="#" className="label-text-alt link link-hover text-[#F9A51A]">Forgot password?</a>
                                     </label>
                                 </div>
                                 <div className="inline-flex items-center">
@@ -103,7 +120,7 @@ const LogIn = () => {
 
                 </div>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

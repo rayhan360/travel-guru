@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import logo from "../assets/logo.svg"
-import { Link, NavLink } from 'react-router-dom';
+import logo2 from "../assets/logo2.svg"
+import { Link, NavLink,  useLocation} from 'react-router-dom';
 import { AuthContext } from "../Providers/AuthProviders";
 // import Search from "./Search";
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext)
+    const location = useLocation()
+
+    const isActive = (path) => {
+        return location.pathname === path
+    };
+
+    const linkClass = isActive("/") ? "text-white" : location.pathname.startsWith("/destination/") ? "text-white" : "text-black";
 
 
 
@@ -15,16 +23,16 @@ const Navbar = () => {
         <div className='max-w-6xl mx-auto my-5'>
             <div className="navbar bg-transparent">
                 <div className="flex-1">
-                    <img src={logo} alt="" />
+                    <img src={isActive("/") ? logo : location.pathname.startsWith("/destination/") ? logo : logo2} alt="" />
                 </div>
                 {/* <Search></Search> */}
 
                 <div className="">
-                    <div className='text-[#F9A51A] font-bold flex gap-5 items-center'>
-                        <NavLink to="/">News</NavLink>
-                        <NavLink to="/about">Destination</NavLink>
-                        <NavLink to="/about">Blog</NavLink>
-                        <NavLink to="/about">Contact</NavLink>
+                    <div className={` text-white font-bold flex gap-5 items-center`}>
+                        <NavLink to="/" className={linkClass}>Home</NavLink>
+                        <NavLink to="/about" className={linkClass}>Destination</NavLink>
+                        <NavLink to="/about" className={linkClass}>Blog</NavLink>
+                        <NavLink to="/about" className={linkClass}>Contact</NavLink>
 
                         {
                             user ? <div className="dropdown dropdown-end">
@@ -33,7 +41,7 @@ const Navbar = () => {
                                         <img src={user.photoURL} alt={user.displayName} />
                                     </div>
                                 </label>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64">
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-700 rounded-box w-64">
                                     <li className="">
                                         <p className="btn btn-sm btn-ghost">{user.displayName}</p>
                                         <p className="btn btn-sm btn-ghost">{user.email}</p>
