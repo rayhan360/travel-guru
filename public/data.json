@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "name": "Sajek Valley",
+      "description": "Explore the scenic beauty of Sajek Valley with lush green hills and serene landscapes. Sajek Valley is a popular tourist destination known for its natural beauty and tranquility. It's an ideal place for nature lovers and adventure seekers.",
+      "image": "https://i.ibb.co/kQdtTG7/Sajek.png"
+    },
+    {
+      "id": 2,
+      "name": "Sreemongol",
+      "description": "Discover the tea gardens and natural beauty of Sreemongol in Bangladesh. Sreemongol is famous for its tea plantations, wildlife, and lush greenery. It's often referred to as the 'Land of Two Leaves and a Bud.'",
+      "image": "https://i.ibb.co/px3DC3k/Sreemongol.png"
+    },
+    {
+      "id": 3,
+      "name": "Sundarbans",
+      "description": "Experience the wild and unique ecosystem of the Sundarbans mangrove forest. The Sundarbans is a UNESCO World Heritage Site and home to the Royal Bengal Tiger. It's a must-visit destination for nature enthusiasts and wildlife lovers.",
+      "image": "https://i.ibb.co/5jJ1LfC/sundorbon.png"
+    },
+    {
+      "id": 4,
+      "name": "Cox's Bazar",
+      "description": "Enjoy the longest natural sea beach in the world at Cox's Bazar, Bangladesh. Cox's Bazar is a coastal paradise known for its sandy shores and vibrant atmosphere. It's a great place for beach lovers and seafood enthusiasts.",
+      "image": "https://i.ibb.co/WWdd6Jk/Rectangle-1.png"
+    }
+  ]
+  
